@@ -5,8 +5,9 @@
  */
 package Controlador;
 
+import Vista.VistaVisualizarDatos;
 import Modelo.Autenticacion;
-import Modelo.DefectoPorHora;
+import Modelo.Hallasgo;
 import Modelo.OrdenDeProduccion;
 import Modelo.Repositorio;
 import Vista.LineasDeTrabajo;
@@ -32,6 +33,7 @@ public class ControladorOrdenDeProduccion implements ActionListener {
     private VistaVisualizarDatos visualizarDatos;
     private Repositorio r = Repositorio.getRepositorio();
     private int linea = 0;
+    private Calendar calendario;
 
     public ControladorOrdenDeProduccion(Autenticacion auteticacion) {
         this.auteticacion = auteticacion;
@@ -106,6 +108,8 @@ public class ControladorOrdenDeProduccion implements ActionListener {
             if (op != null) {
                 ControladorInspeccion controladorInspecion = new ControladorInspeccion(op);
                 controladorInspecion.ejecutar(1);
+               
+               
             } else {
                 JOptionPane.showMessageDialog(null, "No hay ordenes en la linea");
             }
@@ -147,7 +151,8 @@ public class ControladorOrdenDeProduccion implements ActionListener {
 
         if (e.getActionCommand().equals(vistaCrearOP.btn_crearop)) {
 
-            OrdenDeProduccion o = new OrdenDeProduccion(Integer.parseInt(vistaCrearOP.getNumero()), r.buscarModelo(vistaCrearOP.getModelo()).getObjetivo(), r.buscarModelo(vistaCrearOP.getModelo()), linea);
+            this.calendario = Calendar.getInstance();
+            OrdenDeProduccion o = new OrdenDeProduccion(Integer.parseInt(vistaCrearOP.getNumero()), r.buscarModelo(vistaCrearOP.getModelo()).getObjetivo(), r.buscarModelo(vistaCrearOP.getModelo()), linea, calendario.get(Calendar.HOUR_OF_DAY));
             o.setColor(r.buscarColor(vistaCrearOP.getColor()));
             r.ordenes.add(o);
             JOptionPane.showMessageDialog(null, "Orden De produccion creada");
@@ -156,7 +161,7 @@ public class ControladorOrdenDeProduccion implements ActionListener {
             vistaSupervisorLinea.setOP(o);
         }
 
-        if (e.getActionCommand().equals(lineasDeTrabajo.L1)) {
+        if (e.getActionCommand().equals(lineasDeTrabajo.L1) && auteticacion.ObtenerRol().equals("datosenlinea")) {
             this.linea = 1;
             OrdenDeProduccion op = new OrdenDeProduccion();
             op = buscarOP(1, "En Proceso");
@@ -165,7 +170,7 @@ public class ControladorOrdenDeProduccion implements ActionListener {
             if (op != null) {
                 
                 ArrayList<String[]> lista = new ArrayList<String[]>();
-                for (DefectoPorHora h : op.defectosEnUltimasHoras(r.defectos, Calendar.getInstance().get(Calendar.HOUR))) {
+                for (Hallasgo h : op.defectosEnUltimasHoras(r.defectos, Calendar.getInstance().get(Calendar.HOUR))) {
 
                     String linea[] = new String[4];
                     linea[0] = "" + h.getDefecto().getDescripcion();
@@ -182,7 +187,7 @@ public class ControladorOrdenDeProduccion implements ActionListener {
 
         }
 
-        if (e.getActionCommand().equals(lineasDeTrabajo.L2)) {
+        if (e.getActionCommand().equals(lineasDeTrabajo.L2)&& auteticacion.ObtenerRol().equals("datosenlinea")) {
 
             this.linea = 2;
             OrdenDeProduccion op = new OrdenDeProduccion();
@@ -196,7 +201,7 @@ public class ControladorOrdenDeProduccion implements ActionListener {
 
         }
 
-        if (e.getActionCommand().equals(lineasDeTrabajo.L3)) {
+        if (e.getActionCommand().equals(lineasDeTrabajo.L3)&& auteticacion.ObtenerRol().equals("datosenlinea")) {
             this.linea = 3;
             OrdenDeProduccion op = new OrdenDeProduccion();
             op = buscarOP(3, "En Proceso");

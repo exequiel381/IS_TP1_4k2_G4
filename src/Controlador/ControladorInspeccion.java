@@ -21,21 +21,23 @@ public class ControladorInspeccion implements ActionListener {
     private Repositorio r = Repositorio.getRepositorio();
     private VistaSupervisorCalidad vistaSupervisorCalidad;
     private OrdenDeProduccion OP;
-    private ArrayList<DefectoPorHora> defectosPorHora;
+    private ArrayList<Hallasgo> defectosPorHora;
     private Calendar calendario;
     private int hora;
 
     public ControladorInspeccion(OrdenDeProduccion OP) {
         this.OP = OP;
         vistaSupervisorCalidad = new VistaSupervisorCalidad();
-        defectosPorHora = new ArrayList<DefectoPorHora>();
+        defectosPorHora = new ArrayList<Hallasgo>();
         defectosPorHora = OP.getDefectoPorHora();
     }
 
     public void ejecutar(int linea) {
+        
         vistaSupervisorCalidad.setControlador(this);
         vistaSupervisorCalidad.setLinea("" + linea);
         vistaSupervisorCalidad.setNumeroOrden("" + OP.getNumero());
+        vistaSupervisorCalidad.cargarHorasDeInspeccion(2);
         vistaSupervisorCalidad.ejecutar();
     }
 
@@ -48,7 +50,7 @@ public class ControladorInspeccion implements ActionListener {
             for (Defecto d : r.defectos) {
                 if (d.getDescripcion().equals("Deformado") && d.getTipo().equals(TipoDefecto.Reproceso.toString())) {
                     def = d;
-                    this.agregarDefectoActual(def, "Izquierdo");
+                    this.agregarDefectoActual(def, "Izquierdo",1);
                     vistaSupervisorCalidad.setTxtRIDeformado(this.contabilizarDefectosPorTipo(def, "Izquierdo"));
                     break;
                 }
@@ -63,7 +65,7 @@ public class ControladorInspeccion implements ActionListener {
             for (Defecto d : r.defectos) {
                 if (d.getDescripcion().equals("Despegado") && d.getTipo().equals(TipoDefecto.Reproceso.toString())) {
                     def = d;
-                    this.agregarDefectoActual(def, "Izquierdo");
+                    this.agregarDefectoActual(def, "Izquierdo",1);
                     vistaSupervisorCalidad.setTxtRIDespegado(this.contabilizarDefectosPorTipo(def, "Izquierdo"));
                     break;
 
@@ -77,7 +79,7 @@ public class ControladorInspeccion implements ActionListener {
             for (Defecto d : r.defectos) {
                 if (d.getDescripcion().equals("Descolorido") && d.getTipo().equals(TipoDefecto.Reproceso.toString())) {
                     def = d;
-                    this.agregarDefectoActual(def, "Izquierdo");
+                    this.agregarDefectoActual(def, "Izquierdo",1);
                     vistaSupervisorCalidad.setTxtRIDescolorido(this.contabilizarDefectosPorTipo(def, "Izquierdo"));
                     break;
                 }
@@ -91,7 +93,7 @@ public class ControladorInspeccion implements ActionListener {
             for (Defecto d : r.defectos) {
                 if (d.getDescripcion().equals("Descolorido") && d.getTipo().equals(TipoDefecto.Observado.toString())) {
                     def = d;
-                    this.agregarDefectoActual(def, "Izquierdo");
+                    this.agregarDefectoActual(def, "Izquierdo",1);
                     vistaSupervisorCalidad.setTxtOIDescolorido(this.contabilizarDefectosPorTipo(def, "Izquierdo"));
                     break;
                 }
@@ -104,7 +106,7 @@ public class ControladorInspeccion implements ActionListener {
             for (Defecto d : r.defectos) {
                 if (d.getDescripcion().equals("Despegado") && d.getTipo().equals(TipoDefecto.Observado.toString())) {
                     def = d;
-                    this.agregarDefectoActual(def, "Izquierdo");
+                    this.agregarDefectoActual(def, "Izquierdo",1);
                     vistaSupervisorCalidad.setTxtOIDespegado(this.contabilizarDefectosPorTipo(def, "Izquierdo"));
                     break;
                 }
@@ -117,7 +119,7 @@ public class ControladorInspeccion implements ActionListener {
             for (Defecto d : r.defectos) {
                 if (d.getDescripcion().equals("Partido") && d.getTipo().equals(TipoDefecto.Observado.toString())) {
                     def = d;
-                    this.agregarDefectoActual(def, "Izquierdo");
+                    this.agregarDefectoActual(def, "Izquierdo",1);
                     vistaSupervisorCalidad.setTxtOIPartido(this.contabilizarDefectosPorTipo(def, "Izquierdo"));
                     break;
                 }
@@ -131,7 +133,7 @@ public class ControladorInspeccion implements ActionListener {
             for (Defecto d : r.defectos) {
                 if (d.getDescripcion().equals("Deformado") && d.getTipo().equals(TipoDefecto.Reproceso.toString())) {
                     def = d;
-                    this.agregarDefectoActual(def, "Derecho");
+                    this.agregarDefectoActual(def, "Derecho",1);
                     vistaSupervisorCalidad.setTxtRDDeformado1(this.contabilizarDefectosPorTipo(def, "Derecho"));
                     break;
 
@@ -145,7 +147,7 @@ public class ControladorInspeccion implements ActionListener {
             for (Defecto d : r.defectos) {
                 if (d.getDescripcion().equals("Despegado") && d.getTipo().equals(TipoDefecto.Reproceso.toString())) {
                     def = d;
-                    this.agregarDefectoActual(def, "Derecho");
+                    this.agregarDefectoActual(def, "Derecho",1);
                     vistaSupervisorCalidad.setTxtRDDespegado1(this.contabilizarDefectosPorTipo(def, "Derecho"));
                     break;
 
@@ -159,7 +161,7 @@ public class ControladorInspeccion implements ActionListener {
             for (Defecto d : r.defectos) {
                 if (d.getDescripcion().equals("Descolorido") && d.getTipo().equals(TipoDefecto.Reproceso.toString())) {
                     def = d;
-                    this.agregarDefectoActual(def, "Derecho");
+                    this.agregarDefectoActual(def, "Derecho",1);
                     vistaSupervisorCalidad.setTxtRDDescolorido1(this.contabilizarDefectosPorTipo(def, "Derecho"));
                     break;
                 }
@@ -173,7 +175,7 @@ public class ControladorInspeccion implements ActionListener {
             for (Defecto d : r.defectos) {
                 if (d.getDescripcion().equals("Descolorido") && d.getTipo().equals(TipoDefecto.Observado.toString())) {
                     def = d;
-                    this.agregarDefectoActual(def, "Derecho");
+                    this.agregarDefectoActual(def, "Derecho",1);
                     vistaSupervisorCalidad.setTxtODDescolorido(this.contabilizarDefectosPorTipo(def, "Derecho"));
                     break;
                 }
@@ -186,7 +188,7 @@ public class ControladorInspeccion implements ActionListener {
             for (Defecto d : r.defectos) {
                 if (d.getDescripcion().equals("Despegado") && d.getTipo().equals(TipoDefecto.Observado.toString())) {
                     def = d;
-                    this.agregarDefectoActual(def, "Derecho");
+                    this.agregarDefectoActual(def, "Derecho",1);
                     vistaSupervisorCalidad.setTxtODDespegado(this.contabilizarDefectosPorTipo(def, "Derecho"));
                     break;
                 }
@@ -199,7 +201,7 @@ public class ControladorInspeccion implements ActionListener {
             for (Defecto d : r.defectos) {
                 if (d.getDescripcion().equals("Partido") && d.getTipo().equals(TipoDefecto.Observado.toString())) {
                     def = d;
-                    this.agregarDefectoActual(def, "Derecho");
+                    this.agregarDefectoActual(def, "Derecho",1);
                     vistaSupervisorCalidad.setTxtODPartido(this.contabilizarDefectosPorTipo(def, "Derecho"));
                     break;
 
@@ -234,20 +236,14 @@ public class ControladorInspeccion implements ActionListener {
             for (Defecto d : r.defectos) {
                 if (d.getDescripcion().equals("Deformado") && d.getTipo().equals(TipoDefecto.Reproceso.toString())) {
                     def = d;
+                    this.agregarDefectoActual(d, "Izquierdo", -1);
+                    vistaSupervisorCalidad.setTxtRIDeformado(this.contabilizarDefectosPorTipo(def, "Izquierdo"));
                     break;
                 }
             }
-
-            for (int i = 0; i < defectosPorHora.size(); i++) {
-                if (defectosPorHora.get(i).getDefecto().getDescripcion().equals(def.getDescripcion()) && defectosPorHora.get(i).getDefecto().getTipo().equals(def.getTipo()) && defectosPorHora.get(i).getPie().equals("Izquierdo")) {
-                    aux = i;
-                }
-
-                defectosPorHora.remove(aux);
-                vistaSupervisorCalidad.setTxtRIDeformado(this.contabilizarDefectosPorTipo(def, "Izquierdo"));
-                break;
-
-            }
+            
+            
+            
 
         }
 
@@ -290,18 +286,18 @@ public class ControladorInspeccion implements ActionListener {
 
     }
 
-    public void agregarDefectoActual(Defecto d, String tipoPie) {
-        this.calendario = Calendar.getInstance();
-        this.hora = calendario.get(Calendar.HOUR_OF_DAY);
+    public void agregarDefectoActual(Defecto d, String tipoPie, int valor) {
+        //this.calendario = Calendar.getInstance();
+        this.hora = vistaSupervisorCalidad.obtenerHoraDeHallazgo(); //calendario.get(Calendar.HOUR_OF_DAY);
 
-        DefectoPorHora ht = new DefectoPorHora();
+        Hallasgo ht = new Hallasgo();
 
         if (tipoPie.equals("Izquierdo")) {
-            ht = new DefectoPorHora(hora, d, EnumTipoPie.Izquierdo.toString());
+            ht = new Hallasgo(hora, d, EnumTipoPie.Izquierdo.toString(),hora,valor);
         }
 
         if (tipoPie.equals("Derecho")) {
-            ht = new DefectoPorHora(hora, d, EnumTipoPie.Derecho.toString());
+            ht = new Hallasgo(hora, d, EnumTipoPie.Derecho.toString(),hora,valor);
         }
 
         defectosPorHora.add(ht);
@@ -311,9 +307,9 @@ public class ControladorInspeccion implements ActionListener {
 
         int cantidadDefectos = 0;
 
-        for (DefectoPorHora dh : defectosPorHora) {
+        for (Hallasgo dh : defectosPorHora) {
             if (dh.getDefecto().getDescripcion().equals(defecto.getDescripcion()) && dh.getDefecto().getTipo().equals(defecto.getTipo()) && dh.getPie().equals(tipoPie)) {
-                cantidadDefectos++;
+                cantidadDefectos = cantidadDefectos+dh.getCantidad();
             }
         }
 

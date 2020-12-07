@@ -23,7 +23,7 @@ public class Repositorio {
 
     private ArrayList<Integer> horas;
 
-    public static Repositorio getRepositorio() {
+    public static Repositorio getRepositorio() { // Singleton
 
         if (miRepositorio == null) {
 
@@ -84,17 +84,17 @@ public class Repositorio {
         defectos.add(d5);
         defectos.add(d6);
 
-        ArrayList<DefectoPorHora> defectosPorHora = new ArrayList<>();
+        ArrayList<Hallasgo> defectosPorHora = new ArrayList<>();
 
-        DefectoPorHora dh1 = new DefectoPorHora(10, d1, "Izquierdo");
-        DefectoPorHora dh2 = new DefectoPorHora(10, d3, "Izquierdo");
-        DefectoPorHora dh3 = new DefectoPorHora(10, d4, "Derecho");
-        DefectoPorHora dh4 = new DefectoPorHora(10, d4, "Derecho");
-        DefectoPorHora dh5 = new DefectoPorHora(10, d1, "Derecho");
-        DefectoPorHora dh6 = new DefectoPorHora(8, d3, "Derecho");
-        DefectoPorHora dh7 = new DefectoPorHora(7, d6, "Derecho");
-        DefectoPorHora dh8 = new DefectoPorHora(5, d5, "Derecho");
-        DefectoPorHora dh9 = new DefectoPorHora(9, d4, "Izquierdo");
+        Hallasgo dh1 = new Hallasgo(10, d1, "Izquierdo",1,9);
+        Hallasgo dh2 = new Hallasgo(10, d3, "Izquierdo",1,10);
+        Hallasgo dh3 = new Hallasgo(10, d4, "Derecho",1,15);
+        Hallasgo dh4 = new Hallasgo(10, d4, "Derecho",1,10);
+        Hallasgo dh5 = new Hallasgo(10, d1, "Derecho",-1,10);
+        Hallasgo dh6 = new Hallasgo(8, d3, "Derecho",1,15);
+        Hallasgo dh7 = new Hallasgo(7, d6, "Derecho",1,16);
+        Hallasgo dh8 = new Hallasgo(5, d5, "Derecho",-1,14);
+        Hallasgo dh9 = new Hallasgo(9, d4, "Izquierdo",1,13);
 
         defectosPorHora.add(dh1);
         defectosPorHora.add(dh2);
@@ -108,12 +108,12 @@ public class Repositorio {
 
         ordenes = new ArrayList<OrdenDeProduccion>();
 
-        OrdenDeProduccion op1 = new OrdenDeProduccion(258, m1.getObjetivo(), m1, 1);
+        OrdenDeProduccion op1 = new OrdenDeProduccion(258, m1.getObjetivo(), m1, 1,9);
         op1.setColor(color3);
         op1.setDefectosPorHora(defectosPorHora);
         ordenes.add(op1);
 
-        OrdenDeProduccion op2 = new OrdenDeProduccion(2, m2.getObjetivo(), m2, 2);
+        OrdenDeProduccion op2 = new OrdenDeProduccion(2, m2.getObjetivo(), m2, 2,10);
         op2.setColor(color1);
         op2.setEstado("Finalizado");
         ordenes.add(op2);

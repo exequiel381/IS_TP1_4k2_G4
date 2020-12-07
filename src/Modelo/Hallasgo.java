@@ -9,19 +9,23 @@ package Modelo;
  *
  * @author fiume
  */
-public class DefectoPorHora implements Comparable<DefectoPorHora>{
+public class Hallasgo implements Comparable<Hallasgo>{
     private int hora;
     private Defecto defecto;
     private String pie;
     private Integer cantidad;
+    private int agregarQuitar;
 
-    public DefectoPorHora(int hora, Defecto defecto, String pie) {
+    public Hallasgo(int hora, Defecto defecto, String pie, int agregarQuitar, int cantidad) {
         this.hora = hora;
         this.pie=pie;
         this.defecto = defecto;
+        this.agregarQuitar=agregarQuitar;
+        this.cantidad = cantidad;
+        
     }
 
-    public DefectoPorHora(int hora, Defecto defecto, int cantidad) {
+    public Hallasgo(int hora, Defecto defecto, int cantidad) {
         this.hora = hora;
         this.defecto = defecto;
         this.cantidad = cantidad;
@@ -39,7 +43,7 @@ public class DefectoPorHora implements Comparable<DefectoPorHora>{
     
     
 
-    public DefectoPorHora() {
+    public Hallasgo() {
     }
     
     
@@ -69,7 +73,7 @@ public class DefectoPorHora implements Comparable<DefectoPorHora>{
     }
 
     @Override
-    public int compareTo(DefectoPorHora t) {
+    public int compareTo(Hallasgo t) {
         return this.cantidad.compareTo(t.getCantidad());
     }
     

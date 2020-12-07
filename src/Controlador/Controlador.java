@@ -54,7 +54,7 @@ public class Controlador implements ActionListener{
                     break;
                 
                 case "SupervisorCalidad":
-                    
+                
                    autenticacion_vista.dispose();
                    ControladorOrdenDeProduccion cop2 = new ControladorOrdenDeProduccion(au);
                    cop2.ejecutar();

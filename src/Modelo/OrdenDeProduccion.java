@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 public class OrdenDeProduccion {
 
     private ArrayList<Pie> pies = new ArrayList<>();
-    private ArrayList<DefectoPorHora> defectosPorHora = new ArrayList<>();
+    private ArrayList<Hallasgo> defectosPorHora = new ArrayList<>();
     private int numero;
     private int Objetivo;
     private String estado;
@@ -22,6 +22,7 @@ public class OrdenDeProduccion {
     private int linea;
     private Color color;
     private int paresDePrimera = 0;
+    private int HoraCreacion;
 
     private int RI_Despegado;
     private int RI_Descolorido;
@@ -44,12 +45,13 @@ public class OrdenDeProduccion {
 
     
     
-    public OrdenDeProduccion(int numero, int Objetivo, Modelo modelo, int linea) {
+    public OrdenDeProduccion(int numero, int Objetivo, Modelo modelo, int linea, int HoraCreacion) {
         this.estado = "En Proceso";
         this.numero = numero;
         this.Objetivo = Objetivo;
         this.modelo = modelo;
         this.linea = linea;
+        this.HoraCreacion=HoraCreacion;
 
     }
     
@@ -66,12 +68,20 @@ public class OrdenDeProduccion {
         }
         
     }
+
+    public int getHoraCreacion() {
+        return HoraCreacion;
+    }
+
+    public void setHoraCreacion(int HoraCreacion) {
+        this.HoraCreacion = HoraCreacion;
+    }
     
     public int contabilizarDefectosPorHora(int hora, Defecto defecto, String tipoPie) {
         
         int cantidadDefectos = 0;
         
-        for(DefectoPorHora dh : defectosPorHora){
+        for(Hallasgo dh : defectosPorHora){
             if(dh.getHora()==hora && dh.getDefecto().getDescripcion().equals(defecto.getDescripcion()) && dh.getDefecto().getTipo().equals(defecto.getTipo()) && dh.getPie().equals(tipoPie)){
                 cantidadDefectos++;
             }
@@ -84,7 +94,7 @@ public class OrdenDeProduccion {
         
         int cantidadDefectos = 0;
         
-        for(DefectoPorHora dh : defectosPorHora){
+        for(Hallasgo dh : defectosPorHora){
             
             if(dh.getHora()==hora && dh.getDefecto().getDescripcion().equals(defecto.getDescripcion()) && dh.getDefecto().getTipo().equals(defecto.getTipo())){
                 cantidadDefectos++;
@@ -96,21 +106,21 @@ public class OrdenDeProduccion {
         
     }
     
-     public ArrayList<DefectoPorHora> defectosEnUltimasHoras( ArrayList<Defecto> defectos,int hora) {
+     public ArrayList<Hallasgo> defectosEnUltimasHoras( ArrayList<Defecto> defectos,int hora) {
         
-       ArrayList<DefectoPorHora> defectosConCantidad = new ArrayList<>();
+       ArrayList<Hallasgo> defectosConCantidad = new ArrayList<>();
         
        for(int i=(hora-4);i<=hora;i++){
            for(Defecto d : defectos){
                 int cantidadDefectos = this.contabilizarDefectosPorHora(i,d);
                 System.out.println(i);
-                DefectoPorHora aux = new DefectoPorHora(i,d,cantidadDefectos);
+                Hallasgo aux = new Hallasgo(i,d,cantidadDefectos);
                 defectosConCantidad.add(aux);
                 }
        }
        
       Collections.sort(defectosConCantidad, Collections.reverseOrder());
-      ArrayList<DefectoPorHora> primeros = new ArrayList<>();
+      ArrayList<Hallasgo> primeros = new ArrayList<>();
       primeros.add(defectosConCantidad.get(0));
       primeros.add(defectosConCantidad.get(1));
       primeros.add(defectosConCantidad.get(2));
@@ -127,11 +137,11 @@ public class OrdenDeProduccion {
     
     
 
-    public ArrayList<DefectoPorHora> getDefectoPorHora() {
+    public ArrayList<Hallasgo> getDefectoPorHora() {
         return defectosPorHora;
     }
 
-    public void setDefectosPorHora(ArrayList<DefectoPorHora> defectosPorHora) {
+    public void setDefectosPorHora(ArrayList<Hallasgo> defectosPorHora) {
         this.defectosPorHora = defectosPorHora;
     }
     

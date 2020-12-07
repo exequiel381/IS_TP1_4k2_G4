@@ -4,10 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Unidad%20Exe/Programacion/Codigos/Proyectos%20Java/SoftwateTP1/src/Modelo/OrdenDeProduccion.java</file>
-            <file>file:/D:/Unidad%20Exe/Programacion/Codigos/Proyectos%20Java/SoftwateTP1/src/Vista/LineasDeTrabajo.java</file>
-            <file>file:/D:/Unidad%20Exe/Programacion/Codigos/Proyectos%20Java/SoftwateTP1/src/Controlador/Controlador.java</file>
+            <file>file:/D:/Unidad%20Exe/Programacion/Codigos/Proyectos%20Java/SoftwateTP1/test/Modelo/OrdenDeProduccionTest.java</file>
+            <file>file:/D:/Unidad%20Exe/Programacion/Codigos/Proyectos%20Java/SoftwateTP1/src/Modelo/Hallasgo.java</file>
             <file>file:/D:/Unidad%20Exe/Programacion/Codigos/Proyectos%20Java/SoftwateTP1/src/Controlador/ControladorOrdenDeProduccion.java</file>
-            <file>file:/D:/Unidad%20Exe/Programacion/Codigos/Proyectos%20Java/SoftwateTP1/src/Controlador/ControladorInspeccion.java</file>
+            <file>file:/D:/Unidad%20Exe/Programacion/Codigos/Proyectos%20Java/SoftwateTP1/test/Controlador/ControladorOrdenDeProduccionTest.java</file>
+            <file>file:/D:/Unidad%20Exe/Programacion/Codigos/Proyectos%20Java/SoftwateTP1/src/Modelo/Repositorio.java</file>
         </group>
     </open-files>
 </project-private>
