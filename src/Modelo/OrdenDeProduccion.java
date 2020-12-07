@@ -91,6 +91,7 @@ public class OrdenDeProduccion {
         return cantidadDefectos;
         
     }
+    
     public int contabilizarDefectosPorHora(int hora, Defecto defecto) {
         
         int cantidadDefectos = 0;

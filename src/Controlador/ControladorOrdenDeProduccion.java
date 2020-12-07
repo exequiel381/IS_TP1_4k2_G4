@@ -152,10 +152,7 @@ public class ControladorOrdenDeProduccion implements ActionListener {
         if (e.getActionCommand().equals(vistaCrearOP.btn_crearop)) {
 
             this.calendario = Calendar.getInstance();
-            OrdenDeProduccion o = new OrdenDeProduccion(Integer.parseInt(vistaCrearOP.getNumero()), r.buscarModelo(vistaCrearOP.getModelo()).getObjetivo(), r.buscarModelo(vistaCrearOP.getModelo()), linea, calendario.get(Calendar.HOUR_OF_DAY));
-            o.setColor(r.buscarColor(vistaCrearOP.getColor()));
-            r.ordenes.add(o);
-            JOptionPane.showMessageDialog(null, "Orden De produccion creada");
+            OrdenDeProduccion o = auteticacion.crearOP(Integer.parseInt(vistaCrearOP.getNumero()), r.buscarModelo(vistaCrearOP.getModelo()).getObjetivo(), r.buscarModelo(vistaCrearOP.getModelo()), linea, calendario.get(Calendar.HOUR_OF_DAY),vistaCrearOP.getColor());
             vistaCrearOP.dispose();
             vistaSupervisorLinea.ocultarPanel2();
             vistaSupervisorLinea.setOP(o);

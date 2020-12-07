@@ -18,8 +18,8 @@ public class Autenticacion {
     
     private String usuario;
     private String pass;
-    
-    public Autenticacion( String usuario, String pass) {
+    Repositorio c = Repositorio.getRepositorio();
+    public Autenticacion(String usuario, String pass) {
         
        
         this.pass=pass;
@@ -31,7 +31,7 @@ public class Autenticacion {
             Usuario user=null;
             String rol="";
             
-            Repositorio c = Repositorio.getRepositorio();
+            
             
            for(Usuario u:c.usuarios){
                if(u.getUser().equals(usuario)){
@@ -47,6 +47,14 @@ public class Autenticacion {
            
         
             return rol;
+    }
+    
+    public OrdenDeProduccion crearOP(int numero, int Objetivo, Modelo modelo, int linea, int HoraCreacion, String color){
+        OrdenDeProduccion op = new OrdenDeProduccion(numero, Objetivo, modelo, linea, HoraCreacion);
+        op.setColor(c.buscarColor(color));
+        c.ordenes.add(op);
+        JOptionPane.showMessageDialog(null, "Orden De produccion creada");
+        return op;
     }
     
 }
