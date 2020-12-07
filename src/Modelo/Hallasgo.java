@@ -45,6 +45,15 @@ public class Hallasgo implements Comparable<Hallasgo>{
 
     public Hallasgo() {
     }
+
+    public int getAgregarQuitar() {
+        return agregarQuitar;
+    }
+
+    public void setAgregarQuitar(int agregarQuitar) {
+        this.agregarQuitar = agregarQuitar;
+    }
+    
     
     
 

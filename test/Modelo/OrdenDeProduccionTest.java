@@ -23,13 +23,23 @@ public class OrdenDeProduccionTest {
         
         OrdenDeProduccion instance = new OrdenDeProduccion();
         
-        Defecto defecto = new Defecto(1 , "Despegado", "Observado");
+        Defecto defecto = new Defecto(1 , "Despegado", TipoDefecto.Observado.toString());
+        
+        ArrayList<Hallasgo> defectosPorHora = new ArrayList<>();
         
         Hallasgo dh1 = new Hallasgo(10, defecto, "Izquierdo",1,0);
         Hallasgo dh2 = new Hallasgo(10, defecto, "Izquierdo",1,0);
         Hallasgo dh3 = new Hallasgo(10, defecto, "Izquierdo",-1,0);
         Hallasgo dh4 = new Hallasgo(10, defecto, "Izquierdo",1,0);
         Hallasgo dh5 = new Hallasgo(10, defecto, "Derecho",1,0);
+        
+        defectosPorHora.add(dh1);
+        defectosPorHora.add(dh2);
+        defectosPorHora.add(dh3);
+        defectosPorHora.add(dh4);
+        defectosPorHora.add(dh5);
+        
+        instance.setDefectosPorHora(defectosPorHora);
         
         int hora = 10;
         
@@ -39,7 +49,7 @@ public class OrdenDeProduccionTest {
         
         int result = instance.contabilizarDefectosPorHora(hora, defecto, tipoPie);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+       
         
     }
     /*

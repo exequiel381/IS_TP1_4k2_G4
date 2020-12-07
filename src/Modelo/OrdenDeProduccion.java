@@ -81,9 +81,10 @@ public class OrdenDeProduccion {
         
         int cantidadDefectos = 0;
         
-        for(Hallasgo dh : defectosPorHora){
+        for(Hallasgo dh : this.defectosPorHora){
             if(dh.getHora()==hora && dh.getDefecto().getDescripcion().equals(defecto.getDescripcion()) && dh.getDefecto().getTipo().equals(defecto.getTipo()) && dh.getPie().equals(tipoPie)){
-                cantidadDefectos++;
+                cantidadDefectos = cantidadDefectos + dh.getAgregarQuitar();
+                
             }
         }
         
